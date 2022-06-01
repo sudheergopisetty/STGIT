@@ -88,9 +88,29 @@ public class EmployInterfaceImpl implements EmployInterface{
 	}
 
 	@Override
-	public List<Employ> readByEmployName(String mployName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employ> readByEmployName(String employName) {
+		Connection connection = CheckMyConnection.getConnection();	
+		String sqlQuery = "SELECT * FROM employ WHERE employ_Name = \"" + employName + "\";";
+		Statement statement = null;
+		ResultSet resultSet = null;
+		List<Employ> employs = new ArrayList<Employ>();
+		try {
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sqlQuery);
+			
+			Employ employ = null;
+			while(resultSet.next()) {
+				employ = new Employ();
+				employ.setEmploy_id(resultSet.getInt(1));
+				employ.setEmploy_Name(resultSet.getString(2));
+				employ.setEmploy_Password(resultSet.getString(3));
+				employs.add(employ);
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return employs;
 	}
 
 	@Override

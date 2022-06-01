@@ -10,7 +10,7 @@ public interface EmployInterface {
 	public abstract Employ createEmploy(Employ user);
 	
 	public abstract Employ readByEmployId(int employId);
-	public abstract List<Employ> readByEmployName(String mployName);
+	public abstract List<Employ> readByEmployName(String name);
 	public abstract Employ validateEmployIdAndEmployPassword(int EmployId, String Employpassword);
 	public abstract Employ updateEmployById(int employId, Employ employ);
 	public abstract Employ deleteByEmployId(int employId);
