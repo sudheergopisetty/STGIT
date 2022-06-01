@@ -10,9 +10,9 @@ public class MySQLConnectionCheck {
 		Connection connection = null;
 		try {
 			String driverName = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://127.0.0.1:3306/sys";
+			String url = "jdbc:mysql://localhost:3306/sql_demo";
 			Class.forName(driverName);
-			connection = DriverManager.getConnection(url, "root", null);
+			connection = DriverManager.getConnection(url, "root", "Root123!");
 			System.out.println(connection != null ? "connection established" : "connection failed");
 			/*
 			 * Statement stmt = connection.createStatement(); ResultSet rs =
@@ -33,6 +33,7 @@ public class MySQLConnectionCheck {
 		 * finally { try { connection.close(); } catch (SQLException e) {
 		 * e.printStackTrace(); } }
 		 */
+		
 		return connection;
 	}
 	}

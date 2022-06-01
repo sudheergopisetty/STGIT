@@ -19,20 +19,18 @@ public class LogINApp {
 			  });
 		  			
 	
-		  	try (Scanner scanner = new Scanner(System.in)) {
-				System.out.println("Enter User Id");
-				int id = scanner.nextInt();
-				System.out.println("Enter User Name");
-				String userName = scanner.next();
-				System.out.println("Enter User Password");
-				String userPassword = scanner.next();
-				
-				User user = new User(id, userName, userPassword);
-				User userInput = usert.createUser(user);
-				System.out.println("User Successfully updated with Id " + userInput.getUser_id());
-			}catch(Exception e) {
-				e.getMessage();
-			}
+			
+			  try (Scanner scanner = new Scanner(System.in)) {
+			  
+			  System.out.println("Enter User Name"); String userName = scanner.next();
+			  System.out.println("Enter User Password"); String userPassword =
+			  scanner.next();
+			  
+			  User user = new User(userName, userPassword); User userInput =
+			  usert.createUser(user);
+			  System.out.println("User Successfully updated with Id " +
+			  userInput.getUser_id()); }catch(Exception e) { e.getMessage(); }
+			 
 			}
 		
 		

@@ -13,9 +13,11 @@ public class CheckMyConnection {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/employ_schema", "root", null);
+			String url = "jdbc:mysql://localhost:3306/sql_demo";
+
+			con = DriverManager.getConnection(url, "root", "Root123!");
 			Statement stmt = con.createStatement();
-			System.out.println(stmt != null ? "connection established" : "not connected");
+			//System.out.println(stmt != null ? "connection established" : "not connected");
 //			long re = stmt.executeUpdate("delete from emp1;");
 //			System.out.println(re);
 

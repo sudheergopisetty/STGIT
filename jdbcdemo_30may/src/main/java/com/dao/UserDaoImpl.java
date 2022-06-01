@@ -16,19 +16,19 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User createUser(User user) {
-		String insertQuery = "INSERT INTO User_details  (User_name,User_password)VALUES(?,?)";
+		String insertQuery = "INSERT INTO USER_DETAILS  (User_name,User_password)VALUES(?,?)";
 		Connection connection=  MySQLConnectionCheck.getConnection();
 		PreparedStatement preparedStatement = null;
-		boolean bool = false;
+		int bool = 0;
 		try {
 			 preparedStatement = connection.prepareStatement(insertQuery);
 			 preparedStatement.setString(1, user.getUserName());
 			 preparedStatement.setString(2, user.getPassword());
-			 bool = preparedStatement.execute();
+			 bool = preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		if(bool == true) {
+		if(bool != 0) {
 			return user;
 		}else {
 			//
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> readAllUsers() {
 		Connection connection=  MySQLConnectionCheck.getConnection();
-		String sqlQuery = "SELECT * FROM User_details";
+		String sqlQuery = "SELECT * FROM USER_DETAILS";
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<User> users = new ArrayList<User>();
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User readByUserId(int userId) {
 		Connection connection=  MySQLConnectionCheck.getConnection();
-		String sqlQuery = "SELECT * FROM User_details WHERE User_id = \"" + userId+"\";";
+		String sqlQuery = "SELECT * FROM USER_DETAILS WHERE User_id = \"" + userId+"\";";
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 		User userd = null;
@@ -99,7 +99,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> readByUserName(String userName) {
 		Connection connection=  MySQLConnectionCheck.getConnection();
-		String sqlQuery = "SELECT * FROM User_details WHERE User_name = \"" + userName+"\";";
+		String sqlQuery = "SELECT * FROM USER_DETAILS WHERE User_name = \"" + userName+"\";";
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 		User userd = null;
