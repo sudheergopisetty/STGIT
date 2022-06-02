@@ -15,7 +15,7 @@ public class EmployInterfaceImpl implements EmployInterface{
 	@Override
 	public List<Employ> readAllEmployers() {
 		Connection connection = CheckMyConnection.getConnection();
-		String sqlQuery = "SELECT * FROM USER_DETAILS";
+		String sqlQuery = "SELECT * FROM employ";
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<Employ> employs =new ArrayList<Employ>();
@@ -42,7 +42,7 @@ public class EmployInterfaceImpl implements EmployInterface{
 	@Override
 	public Employ createEmploy(Employ user) {
 		Connection connection = CheckMyConnection.getConnection();
-		String sqlQuery = "INSERT INTO USER_DETAILS  (User_name,User_password)VALUES(?,?)";
+		String sqlQuery = "INSERT INTO employ  (employ_Name,employ_password)VALUES(?,?)";
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(sqlQuery);
@@ -67,7 +67,7 @@ public class EmployInterfaceImpl implements EmployInterface{
 	@Override
 	public Employ readByEmployId(int employId) {
 		Connection connection = CheckMyConnection.getConnection();
-		String sqlQuery  = "SELECT * FROM USER_DETAILS WHERE User_id = \""+employId+"\";";
+		String sqlQuery  = "SELECT * FROM employ WHERE employ_Id = \""+employId+"\";";
 		Statement statement = null;
 		ResultSet resultSet = null;
 		Employ employ = null;
@@ -90,7 +90,7 @@ public class EmployInterfaceImpl implements EmployInterface{
 	@Override
 	public List<Employ> readByEmployName(String employName) {
 		Connection connection = CheckMyConnection.getConnection();	
-		String sqlQuery = "SELECT * FROM USER_DETAILS WHERE User_name = \"" + employName + "\";";
+		String sqlQuery = "SELECT * FROM employ WHERE employ_Name = \"" + employName + "\";";
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<Employ> employs = new ArrayList<Employ>();
@@ -115,27 +115,8 @@ public class EmployInterfaceImpl implements EmployInterface{
 
 	@Override
 	public Employ validateEmployIdAndEmployPassword(int EmployId, String Employpassword) {
-		Connection connection = CheckMyConnection.getConnection();
-		String sqlQuery = "SELECT * FROM USER_DETAILS WHERE User_id = \"" +EmployId+ "\" ; "; //&& User_password=\"" +Employpassword+"\"
-		Statement statement = null;
-		ResultSet resultSet = null;
-		Employ employ = null;
-
-		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sqlQuery);
-			while(resultSet.next()) {
-				employ = new Employ();
-				employ.setEmploy_id(resultSet.getInt(1));
-				employ.setEmploy_Name(resultSet.getString(2));
-				employ.setEmploy_Password(resultSet.getString(3));
-				
-			}
-			
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return employ;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
