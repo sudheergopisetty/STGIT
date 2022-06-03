@@ -1,0 +1,105 @@
+Step 1 : maven project 
+
+		packaging  : war 
+
+
+Step 2 : pom.xml 
+
+<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring.mvc.version>5.3.19</spring.mvc.version>
+		<servlets.version>3.1.0</servlets.version>
+		<jsp.version>2.3.1</jsp.version>
+	</properties>
+	<dependencies>
+
+		<!-- Spring MVC Dependency -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.mvc.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSP Dependency -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+Step 3 : create a folder  "WEB-INF"
+		src\main\webapp 
+Step 4 : DD Deployment descriptor   web.xml ( copy paste) 
+<servlet>
+		<servlet-name>happy</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+Step 5 : create a spring config file <name_as_per_xml>-servlet.xml 
+
+		happy-servlet.xml 
+
+	<context:component-scan base-package="com" />
+	
+	
+
+	<!-- View Resolver -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+Step 6 : create package 
+
+		com.controller
+		com.model
+		com.service
+		com.dao
+		com.exception 
+
+Step 7 :  com.controller 	( @Controller) 
+
+@Controller
+public class HelloWorld {
+
+	@RequestMapping(value = "abc")	//http://localhost:8080/<projectNAme>/abc
+	public String myFunction() {
+		return "success";				//output == view 
+	}
+	
+	@RequestMapping(value = "efg")	//http://localhost:8080/<projectNAme>/efg
+	public String myFunctionTwo() {
+		return "thankyou";
+	}
+
+}
+
+Step 8 : as per view resolver create a folder  WEB-INF/view
+
+Step9 : as per the return string creat <filename>.jsp 
+a) success
+<body>
+
+	<h2>Welcome to first demo</h2>
+</body>
+
+b) thankyou.jsp
+<body>
+
+	<h2>Thank you</h2>
+</body>
+
+Strp 10 : Right click the @Controller.java  --> run  --> run on server 
