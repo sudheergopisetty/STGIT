@@ -16,6 +16,7 @@ public class FirstSpringApp {
 		// interface var = new InterImpl();
 
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/config/happy.xml");
+<<<<<<< Updated upstream
 		Department department = (Department) applicationContext.getBean("department");
 		//System.out.println("Dep id is:" + department.getDeptId());
 		//System.out.println("Dep name is:" + department.getDeptName());
@@ -31,6 +32,25 @@ public class FirstSpringApp {
 		}
 
 		);
+=======
+		
+		/*
+		 * Employ employ = (Employ) applicationContext.getBean("employ");
+		 * 
+		 * System.out.println("Employ Number : " + employ.getEmployNo()); // construtor
+		 * System.out.println("Employ Name : " + employ.getEmpName());
+		 */
+		
+		
+		//Department department = new Department();  // developer control 
+		
+		Department obj = (Department) applicationContext.getBean("department");
+		System.out.println("dept Number : " + obj.getDeptId());   // setter
+		System.out.println("emp no : " + obj.getEmploy().getEmployNo());
+
+		
+		System.out.println("The end");
+>>>>>>> Stashed changes
 
 	}
 
