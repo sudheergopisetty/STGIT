@@ -7,16 +7,50 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="employ" class="com.model.Employ" >
-		<constructor-arg value="20"></constructor-arg>
-		<constructor-arg value="two"></constructor-arg>
-		
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:/abc.properties</value>
+				<value>classpath*:/def.properties</value>
+			</list>
+		</property>
 	</bean>
-	<bean id="department" class="com.model.Department">
-				
-		<property name="deptId" value="123"> </property>
-		<constructor-arg value="10"></constructor-arg>
-	
+
+
+	<import resource="world.xml" />
+	<bean id="employee1" class="com.model.Employee">
+		<property name="empNo" value="10"></property>
+		<property name="empName" value="steve"></property>
+
 	</bean>
- 
+
+
+	<bean id="employee2" class="com.model.Employee">
+		<property name="empNo" value="20"></property>
+		<property name="empName" value="rogers"></property>
+
+	</bean>
+
+	<bean id="employee3" class="com.model.Employee">
+		<property name="empNo" value="30"></property>
+		<property name="empName" value="buck"></property>
+
+	</bean>
+
+	<bean name="department" class="com.model.Department">
+
+		<property name="deptId" value="${cat}"></property>
+		<property name="deptName" value="${dog}"></property>
+		<property name="employees">
+			<set>
+				<ref bean="employee1" />
+				<ref bean="employee2" />
+				<ref bean="employee3" />
+			</set>
+
+		</property>
+
+	</bean>
+
 </beans>

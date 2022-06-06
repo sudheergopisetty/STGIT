@@ -7,14 +7,17 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<bean id="employ" class="com.model.Employ" >
+	<property name="employId" value="102"></property>
+	<property name="employName" value="sudheer"></property>
+		
+	</bean>
 
-	<bean name="department" class="com.model.Department">
-
-		<property name="deptId" value="${cat}"></property>
-		<property name="deptName" value="${dog}"></property>
-	   <property name="employee" ref="employee"></property>
+	<bean id="department" class="com.model.Department">
 
 	</bean>
+
+
 
 
 </beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FirstControlerService WSDL service -->
+
+  <service name="FirstControler" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://controler.com"/>
+      <parameter name="wsdlServiceElement" value="FirstControlerService"/>
+      <parameter name="schemaQualified" value="http://controler.com"/>
+      <parameter name="wsdlServicePort" value="FirstControler"/>
+      <parameter name="className" value="com.controler.FirstControler"/>
+      <parameter name="wsdlPortType" value="FirstControler"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://controler.com" xmlns:retNS="http://controler.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="firstFunction" qname="operNS:firstFunction" returnQName="retNS:firstFunctionReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="firstFunction"/>
+
+  </service>
+</deployment>
