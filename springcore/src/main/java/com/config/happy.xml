@@ -6,6 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd 
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
+<<<<<<< Updated upstream
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -54,3 +55,27 @@
 	</bean>
 
 </beans>
+=======
+<import resource ="world.xml"></import>
+  <!-- <context:property-placeholder location="classpath:abc.properties" />
+  <context:property-placeholder location="classpath:efg.properties" /> -->
+  <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    <!-- <property name="location" value="/abc.properties"/>
+    <property name="location" value="/efg.properties"/> -->
+      <context:property-placeholder location="classpath:efg.properties" /> 
+    
+</bean>
+	<bean id="employ" class="com.model.Employ" >
+		<constructor-arg value="${a}"></constructor-arg>
+		<constructor-arg value="two"></constructor-arg>
+		
+	</bean>
+	<!-- <bean id="department" class="com.model.Department">
+				
+		<property name="deptId" value="123"> </property>
+		<constructor-arg value="10"></constructor-arg>
+	
+	</bean> -->
+ 
+</beans>
+>>>>>>> Stashed changes
