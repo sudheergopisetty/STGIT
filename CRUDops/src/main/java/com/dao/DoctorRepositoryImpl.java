@@ -14,7 +14,6 @@ import com.model.Doctor;
 @Repository
 public class DoctorRepositoryImpl implements DoctorRepository {
 	
-	@SuppressWarnings("unused")
 	@Autowired
 	private ConnectorClass connectorclass;
 	private Doctor doctor1;

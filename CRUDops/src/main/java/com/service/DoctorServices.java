@@ -2,8 +2,11 @@ package com.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.model.Doctor;
 
+@Service
 public interface DoctorServices {
 
 	public abstract Doctor CreateDoctor(Doctor doctor);

@@ -2,8 +2,11 @@ package com.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.model.Doctor;
 
+@Repository
 public interface DoctorRepository {
 
 	public abstract Doctor CreateDoctor(Doctor doctor);
