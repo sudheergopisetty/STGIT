@@ -1,0 +1,51 @@
+Dependencies 
+a) Spring Web 
+b) H2 database 
+c) Spring Data JPA
+d) lombok
+
+Step 1 Add  Lombok API 
+- Lombok is used to reduce boilerplate code for model/data     objects, e.g., it can generate getters and setters for those     objects automatically by using Lombok annotations. 
+- The easiest way is to use the @Data annotation.
+- Other Lombok Annotation 
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
+Ex :
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Employee {  }
+
+Slf4j Spring Boot
+-----------------
+
+- The Simple Logging Facade for Java (SLF4J) serves as a simple      facade or abstraction for various logging frameworks (e.g.       java.util.logging, logback, log4j) allowing the end user to plug   in the desired logging framework at deployment time.
+
+- SLF4J facilitates your code to make logging calls without        binding to a specific logging implementation. 
+
+application.properties 
+----------------------
+
+logging.file.name=<filename>.log
+logging.pattern.rolling-file-name=MyApp-%d{yyyy-MM-dd}.%i.log
+logging.file.max-size=1MB
+logging.file.total-size-cap=10MB
+logging.file.max-history=30
+logging.file.clean-history-on-start=true
+
+Step
+
+@Slf4j
+public class EmployeeService 
+{
+ public Employee readEmployeeServiceById(Integer empId) {
+   log.info("Inside readEmployeeServiceById() of service");
+
+}

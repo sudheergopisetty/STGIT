@@ -1,0 +1,193 @@
+Feign REST Client
+- OpenFeign which is a declarative REST client.
+- Originally Netflix developed Feign, but as they stopped supporting the     library, it is now a community-driven project and is called OpenFeign.
+- It makes writing web service clients easier. 
+- To use Feign create an interface and annotate it. 
+- It has pluggable annotation support including Feign annotations and    JAX-RS annotations. 
+- Feign also supports pluggable encoders and decoders
+- Spring Cloud integrates Ribbon and Eureka to provide a load balanced   http client when using Feign.
+
+Demo 
+
+Dependency : OpenFeign (search)  -  spring-cloud-starter-openfeign
+
+
+
+Step 1 : 
+ 	spring-cloud-starter-openfeign
+
+
+Step 2 : 
+
+@SpringBootApplication
+@EnableFeignClients
+public class ApplicationProducer {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+
+Step 3 :
+
+@FeignClient("stores")
+public interface StoreClient {
+    @RequestMapping(method = RequestMethod.GET, value = "/stores")
+    List<Store> getStores();
+
+    @RequestMapping(method = RequestMethod.POST, value = "/stores/{storeId}", consumes = "application/json")
+    Store update(@PathVariable("storeId") Long storeId, Store store);
+}
+
+Note : 
+a) @FeignClient annotation 
+b) The String value ("stores" above) is an arbitrary client name, which is    used to create a Ribbon load balancer.
+
+
+
+Demo 1 : Create a Spring boot application 
+
+Step 1 : https://start.spring.io/
+		Dependencies :  1) Spring Web WEB
+				2) OpenFeign
+		package :jar
+
+Step 2 : application.properties 
+
+server.port=9090
+server.servlet.context-path=/springboot
+
+Step 3 : Model 
+
+public class Employee {
+	private int empId;
+	private String empName;
+
+
+Step 4 : Controller
+
+@RestController
+public class EmployeeController {
+
+	@GetMapping (value="producerOne")
+	public String firstProducer()
+	{
+	  return "Welcome to producer one";
+	}
+	
+
+	@GetMapping (value="producerTwo")
+	public ResponseEntity<Employee> secondProducer()
+	{
+	  Employee employee = new Employee(10,"Ten");
+	  return new ResponseEntity<Employee>(employee,HttpStatus.OK);
+	}
+	
+	@GetMapping (value="producerThree/{id}")
+public ResponseEntity<Employee> thirdProducer(@PathVariable("id") int var)
+	{
+	  Employee employee = new Employee(var,"Path Variable");
+	  return new ResponseEntity<Employee>(employee,HttpStatus.OK);
+	}
+}
+
+
+Step 5 :@EnableFeignClients 
+
+@SpringBootApplication
+@EnableFeignClients
+public class SbfeignproducerApplication {
+
+	public static void main(String[] args) {
+	 SpringApplication.run(SbfeignproducerApplication.class, args);
+	}
+
+}
+
+Demo 2
+
+Step 1 : https://start.spring.io/
+	Dependencies :  1) Spring Web WEB
+			2) OpenFeign
+	package :jar 
+
+Step 2 : application.properties 
+
+server.port = 9091
+
+
+Step 3 : 		// to match the producer 
+
+public class Employee {
+	private int empId;
+	private String empName;
+
+
+Step 4 : create an interface
+
+@FeignClient(name="simple-Ref",url = "http://localhost:9090/springboot")
+public interface SimpleClient {
+
+	@GetMapping("/producerOne")		// uri as per producer
+	String getFirstData();
+
+	@GetMapping("/producerTwo")
+	Employee getSecondData();
+
+	@GetMapping("/producerThree/{dataId}")
+    ResponseEntity<Employee> getData(@PathVariable("dataId") int dataId);
+}
+ 
+
+Step 5 : 
+
+@RestController
+public class RestConsumer {
+
+	@Autowired
+	private SimpleClient simpleClient;
+
+	
+	@GetMapping("/hello")
+	public ResponseEntity<String> getDataOne() {
+	   String string = simpleClient.getFirstData();
+	   return new ResponseEntity<String>(string, HttpStatus.OK);
+	}
+
+	@GetMapping("/world")
+	public ResponseEntity<Employee> getDataTwo() {
+	   Employee employee = simpleClient.getSecondData();
+	   return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+
+	@GetMapping("/data/{id}")
+	public ResponseEntity<Employee> getData(@PathVariable int id) {
+		return simpleClient.getData(id);
+	}
+}
+
+
+Step 6 : 
+
+@SpringBootApplication
+@EnableFeignClients
+public class SbfeignApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SbfeignApplication.class, args);
+	}
+
+}
+
+
+Step 7 : a) Run the first app
+	 b) Run the second app 
+
+Note:
+Through the second app we access the first app 
+
+
+https://examples.javacodegeeks.com/enterprise-java/spring/spring-cloud-feign-client-example/
+
+https://www.appsdeveloperblog.com/feign-client-to-call-another-microservice/

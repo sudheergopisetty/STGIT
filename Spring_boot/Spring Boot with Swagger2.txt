@@ -1,0 +1,104 @@
+What is Swagger?
+- Swagger is a tool, a specification and a complete framework   implementation for producing the visual representation of   RESTful Web Services
+- Clients will need to know how to interact with your API.
+- Swagger is widely used for visualizing APIs, and with Swagger UI   it provides online sandbox for frontend developers.
+-  Springfox supports both Swagger 1.2 and 2.0.
+
+Dependecies : web  + JPA
+
+	<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+	<dependency>
+	  <groupId>io.springfox</groupId>
+	  <artifactId>springfox-swagger2</artifactId>
+	  <version>2.4.0</version>
+	</dependency>
+
+	<dependency>
+        	<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger-ui</artifactId>
+		<version>2.4.0</version>
+	</dependency>
+	
+	<dependency>
+    		<groupId>javax.validation</groupId>
+   		<artifactId>validation-api</artifactId>
+    		<version>2.0.0.Final</version>
+	</dependency
+
+
+@SpringBootApplication
+@EnableSwagger2
+@SwaggerDefinition
+public class SwaggerDemoApplication {
+   public static void main(String[] args) {
+      SpringApplication.run(SwaggerDemoApplication.class, args);
+   }
+}
+
+
+Step 3 : application.properties
+
+spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
+Step 2 : create an entity class
+
+
+
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.Size;
+
+@Entity
+@ApiModel(description="All details about the student. ")
+public class Student {
+  @Id
+  @GeneratedValue
+  private Long id;
+	  
+  @ApiModelProperty(notes="Name should have atleast 2 characters")
+  @Size(min=2, message="Name should have atleast 2 characters")
+  private String name;
+	  
+  private String passportNumber;
+}
+
+Step 3 : Exception handling
+
+public class StudentNotFoundException extends RuntimeException {
+
+	public StudentNotFoundException(String exception) {
+		super(exception);
+	}
+}
+
+Step 4 : StudentRepository.java
+
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.Size;
+
+@Entity
+@ApiModel(description = "All details about the student. ")
+public class Student {
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	@ApiModelProperty(notes = "Name should have atleast 2 characters")
+	@Size(min = 2, message = "Name should have atleast 2 characters")
+	private String name;
+
+	private String passportNumber;
+
+
+http://localhost:9090/swagger-ui.html

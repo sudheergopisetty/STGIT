@@ -1,0 +1,11 @@
+1.astraction and abstract class
+2.Interface and functional interface
+3.Why we go for functional interface
+4.Gave scenario based on abstraction , interface and functional interface
+5.Access modifiers
+6.Prodectors and default in java
+7.difference interface and abstract class
+8.why we are using abstract methods
+9.what is collections and how its working
+10.how to sort data by using collections
+11.comparable vs comparator
