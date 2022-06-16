@@ -19,4 +19,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query(value = "SELECT * FROM user as s WHERE s.user_id= :status ;", nativeQuery = true)
 	public abstract User readById(@Param("status") int userId);
+	
+
+	@Query(value = "SELECT * FROM user as s WHERE s.user_id= :status ;", nativeQuery = true)
+	public abstract User updateById(@Param("status") int userId);
+
 }

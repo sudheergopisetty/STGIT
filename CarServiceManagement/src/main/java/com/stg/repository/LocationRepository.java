@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.stg.model.Location;
-import com.stg.model.User;
+
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer>{
 	
-	@Query(value = "SELECT * FROM user;", nativeQuery = true)
-	public abstract List<User> readAllUsers();
+	@Query(value = "SELECT * FROM location;", nativeQuery = true)
+	public abstract List<Location> readAllLocations();
 
 }

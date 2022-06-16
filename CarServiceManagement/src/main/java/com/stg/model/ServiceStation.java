@@ -1,70 +1,50 @@
 package com.stg.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "service_station")
 public class ServiceStation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "service_staton_id")
+	@Column(name = "service_station_id")
 	private int servieStationId;
-	@Column(name = "service_staton_name")
+	@Column(name = "service_station_name")
 	private String serviceStationName;
 	@Column(name = "openingTime")
 	private String ServiceStationOpeningTime;
 	@Column(name = "closingTime")
-	private String ServiceStationClosingTime;
+	private String serviceStationClosingTime;
 
+	@JsonManagedReference(value = "services")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serviceRef")
+	private List<Address> address;
 
-	public ServiceStation() {
-		super();
-	}
-
-	public ServiceStation(int servieStationId, String serviceStationName, String serviceStationOpeningTime,
-			String serviceStationClosingTime) {
-		super();
-		this.servieStationId = servieStationId;
-		this.serviceStationName = serviceStationName;
-		ServiceStationOpeningTime = serviceStationOpeningTime;
-		ServiceStationClosingTime = serviceStationClosingTime;
-	}
-
-	public int getServieStationId() {
-		return servieStationId;
-	}
-
-	public void setServieStationId(int servieStationId) {
-		this.servieStationId = servieStationId;
-	}
-
-	public String getServiceStationName() {
-		return serviceStationName;
-	}
-
-	public void setServiceStationName(String serviceStationName) {
-		this.serviceStationName = serviceStationName;
-	}
-
-	public String getServiceStationOpeningTime() {
-		return ServiceStationOpeningTime;
-	}
-
-	public void setServiceStationOpeningTime(String serviceStationOpeningTime) {
-		ServiceStationOpeningTime = serviceStationOpeningTime;
-	}
-
-	public String getServiceStationClosingTime() {
-		return ServiceStationClosingTime;
-	}
-
-	public void setServiceStationClosingTime(String serviceStationClosingTime) {
-		ServiceStationClosingTime = serviceStationClosingTime;
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "locationId", nullable = false, referencedColumnName = "location_id")
+	@JsonBackReference(value = "locations")
+	private Location locationRef;
 
 }

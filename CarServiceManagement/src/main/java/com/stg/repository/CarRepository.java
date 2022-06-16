@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.stg.model.Car;
-import com.stg.model.User;
 
 public interface CarRepository extends JpaRepository<Car, Integer> {
 	@Query(value = "SELECT * FROM car;", nativeQuery = true)
