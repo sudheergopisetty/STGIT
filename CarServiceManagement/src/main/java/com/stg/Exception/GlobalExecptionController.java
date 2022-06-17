@@ -11,8 +11,36 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExecptionController {
 
+	/*
+	 * @ExceptionHandler(AuctionAppException.class)
+	 * 
+	 * @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	 * 
+	 * @ResponseBody public GlobalExecption
+	 * handleResourceNotFound(AuctionAppException exception, HttpServletRequest
+	 * request) {
+	 * 
+	 * GlobalExecption error = new GlobalExecption();
+	 * error.setErrorMessage(exception.getMessage());
+	 * error.setRequestedURI(request.getRequestURI());
+	 * 
+	 * return error; }
+	 */
+	@ExceptionHandler(NotAuthorisedException.class)
+	@ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+	@ResponseBody
+	public GlobalExecption handleResourceNotFound(NotAuthorisedException exception,
+			HttpServletRequest request) {
+
+		GlobalExecption error = new GlobalExecption();
+		error.setErrorMessage(exception.getMessage());
+		error.setRequestedURI(request.getRequestURI());
+
+		return error;
+	}
+	
 	@ExceptionHandler(ResourceNotFoundException.class)
-	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public GlobalExecption handleResourceNotFound(ResourceNotFoundException exception,
 			HttpServletRequest request) {

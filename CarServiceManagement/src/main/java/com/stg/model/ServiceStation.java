@@ -1,5 +1,7 @@
 package com.stg.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,6 +42,12 @@ public class ServiceStation {
 	@Column(name = "closingTime")
 	private String serviceStationClosingTime;
 
+	@ManyToMany
+	@JoinTable(name = "users_in_service_station", 
+	joinColumns = @JoinColumn(name = "service_station_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users_in_service_station = new ArrayList<>();
+
 	@JsonManagedReference(value = "services")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serviceRef")
 	private List<Address> address;
@@ -46,5 +56,11 @@ public class ServiceStation {
 	@JoinColumn(name = "locationId", nullable = false, referencedColumnName = "location_id")
 	@JsonBackReference(value = "locations")
 	private Location locationRef;
+
+	public void enrollUser(User user) {
+		users_in_service_station.add(user);
+		
+	}
+
 
 }

@@ -1,12 +1,6 @@
 package com.stg.Exception;
 
-/*import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;*/
 
-/*@Data
-@AllArgsConstructor
-@NoArgsConstructor*/
 public class GlobalExecption {
 
 	private String errorMessage;

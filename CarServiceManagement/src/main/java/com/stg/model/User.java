@@ -1,5 +1,6 @@
 package com.stg.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,12 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,12 +39,13 @@ public class User {
 	private String gmailId;
 	@Column(name = "password", length = 60)
 	private String password;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin_id", nullable = false, referencedColumnName = "admin_id")
-	@JsonBackReference(value = "admins")
-	// @JsonIgnore
-	private User adminRef;
+	
+	@ManyToMany(mappedBy = "users_in_service_station")
+	private List<ServiceStation> stations = new ArrayList<>();
+	
+	private void addServiceStation(ServiceStation user) {
+		this.stations.add(user);
+	}
 	
 	@JsonManagedReference(value = "cars")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userRef")

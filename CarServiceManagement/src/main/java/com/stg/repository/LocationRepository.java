@@ -14,5 +14,6 @@ public interface LocationRepository extends JpaRepository<Location, Integer>{
 	
 	@Query(value = "SELECT * FROM location;", nativeQuery = true)
 	public abstract List<Location> readAllLocations();
+	
 
 }
