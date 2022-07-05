@@ -16,7 +16,7 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 	public abstract Car  readByCarId(@Param("status") int carId);
 	
 	
-	@Query(value = "SELECT * FROM car as s WHERE s.user_id= :status ;", nativeQuery = true)
+	@Query(value = "SELECT * FROM car as s WHERE s.car_id= :status ;", nativeQuery = true)
 	public abstract List<Car>  readByuserId(@Param("status") int carId);
 
 }

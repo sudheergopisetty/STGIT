@@ -9,15 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,11 +36,14 @@ public class User {
 	@Column(name = "password", length = 60)
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin_id", nullable = false, referencedColumnName = "admin_id")
-	@JsonBackReference(value = "admins")
-	// @JsonIgnore
-	private User adminRef;
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "admin_id", nullable = false, referencedColumnName =
+	 * "admin_id")
+	 * 
+	 * @JsonBackReference(value = "admins") // @JsonIgnore private User adminRef;
+	 */
 	
 	@JsonManagedReference(value = "cars")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userRef")
